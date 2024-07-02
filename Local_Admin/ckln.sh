@@ -59,6 +59,7 @@ function rmlnk() {
   if [ -z "${@:1}" ] ; then
     $SEEHELP
   else
+    DIR="$1"
     sudo unlink ${BINDIR}${DIR}
     printf $red "${DIR} Removed" || printf $yellow "Error Removing ${DIR}"
   fi
