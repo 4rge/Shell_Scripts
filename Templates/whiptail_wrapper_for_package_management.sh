@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 
+PKGMGMT="apt"
+
 function aptModule() {
 {
 INC="$( echo $((100/"$(echo $LIST | wc | awk '{print $2}')")))"
 for PKG in $LIST ; do
     sleep 0.5
-    COMMAND="apt ${ACTION} ${PKG} -y"
+    COMMAND="${PKGMGMT} ${ACTION} ${PKG} -y"
     echo -e "XXX\n${PER}\n${COMMAND}... \nXXX"
     $COMMAND 2> /dev/null
     PER=$(( $PER + $INC ))
@@ -27,14 +29,16 @@ whiptail --title "Operative Systems" --menu "Make your choice" 16 100 9 \
 case $CHOICE in
         "1)")
                 LIST="x11-apps mc"
-                ACTION="install"
+                ACTION="install"  ## Uncomment For Debian
+##              ACTION="-Syyu"  ## Uncomment For Arch
                 aptModule
                 read -r result < result
         ;;
 
         "2)")
                 LIST="x11-apps mc"
-                ACTION="purge"
+                ACTION="purge"  ## Uncomment For Debian
+##              ACTION="-R"  ## Uncomment For Arch
                 aptModule
                 read -r result < result
         ;;
