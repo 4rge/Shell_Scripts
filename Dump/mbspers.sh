@@ -1,3 +1,3 @@
 #!/usr/bin/env sh
 
-/sbin/iw wlp1s0 station dump | grep 'tx bitrate' | awk '{print $3}'
+"echo bitrate: $(/sbin/iw wlp1s0 station dump | perl -lne "print if /tx bitrate/ || /rx bitrate/ ..  s/^\s+|\s+$//g"
